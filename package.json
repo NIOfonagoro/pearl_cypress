@@ -1,0 +1,35 @@
+{
+  "name": "pearl_cypress",
+  "version": "1.0.0",
+  "description": "Automation Framework with Cypress to test the Connected Risk Engine (Project Pearl)",
+  "main": "index.js",
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:run-dashboard": "cypress run --record --key dd58d046-fde2-48ad-870c-63cb01584897",
+    "cy:update-snapshots": "cypress run --env updateSnapshots=true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NIOfonagoro/pearl_cypress.git"
+  },
+  "keywords": [
+    "Automation",
+    "Framework",
+    "Cypress",
+    "Javascript"
+  ],
+  "author": "Play Consulting",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NIOfonagoro/pearl_cypress/issues"
+  },
+  "homepage": "https://github.com/NIOfonagoro/pearl_cypress#readme",
+  "dependencies": {
+    "cypress": "^4.3.0",
+    "cypress-image-snapshot": "^3.1.1"
+  },
+  "devDependencies": {
+    "prettier": "^2.0.2"
+  }
+}
