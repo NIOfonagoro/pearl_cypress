@@ -1,6 +1,6 @@
 const { QA_CONNECTED_RISK_ENGINE_URL } = require('../../../config.js');
 
-describe('Login/Logout Test', () => {
+describe('Unsuccessful Login', () => {
     before(function () {
         cy.visit(QA_CONNECTED_RISK_ENGINE_URL);
         cy.url().should('include', 'qa.pearl.pwc.com');
@@ -15,21 +15,38 @@ describe('Login/Logout Test', () => {
     })
 
     it('should display error message', () => {
-        cy.get('.alert alert-error').should('be.visible');
+        cy.get('.kc-feedback-text').should('be.visible');
     })
 
-    it.skip('should log into the application', () => {
+})
+
+describe('Successful Login & Logout', () => {
+    before(function () {
+        cy.visit(QA_CONNECTED_RISK_ENGINE_URL);
+        cy.url().should('include', 'qa.pearl.pwc.com');
+        cy.title().should('eq', 'Log in to Connected Risk Engine');
+    })
+
+    it('should log in and out into the application', () => {
+
         cy.fixture('users/externalAdminUser').then(user => {
             const username = user.username;
             const password = user.password;
 
-            cy.get('#username').clear().type(username);
-            cy.get('#password').clear().type(password);
-            cy.get('#kc-login').click();
+            cy.login(username, password);
         })
 
-        cy.get('.jss145').should('be.visible');
+        /* if (true == cy.isVisible('[class="sc-dnqmqq sc-hCbubC gLCWmd"]')) {
+            cy.get('[alt="grey arrow right"]').eq(0).click
+        } */
+
         cy.url().should('include', '/main/dashboard');
+        cy.get('.jss145').should('be.visible');
+
+        cy.get('[class="sc-ifAKCX hwgAZr"]').eq(2).click();
+        cy.get('[role="menuitem"]').contains('Logout').click();
+        cy.title().should('eq', 'Log in to Connected Risk Engine');
     })
+
 
 })

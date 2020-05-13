@@ -35,3 +35,10 @@ Cypress.Commands.add('isVisible', selector => {
 Cypress.Commands.add('isHidden', selector => {
     cy.get(selector).should('not.be.visible');
 })
+
+Cypress.Commands.add('login', (username, password) => {
+    cy.get('#kc-form-login').should('be.visible').click();
+    cy.get('#username').clear().type(username);
+    cy.get('#password').clear().type(password);
+    cy.get('#kc-login').click();
+});

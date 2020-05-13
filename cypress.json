@@ -1,5 +1,7 @@
 {
     "watchForFileChanges": false,
-    "chromeWebSecurity": false,
+    "chromeWebSecurity": true,
+    "viewportWidth": 1280,
+    "viewportHeight": 720,
     "projectId": "hw4j6y"
 }
