@@ -1,7 +1,7 @@
 const { QA_CONNECTED_RISK_ENGINE_URL } = require('../../../config.js');
 
 describe('Create Campaign', () => {
-    before(function () {
+    beforeEach(function () {
         cy.visit(QA_CONNECTED_RISK_ENGINE_URL);
         cy.url().should('include', 'qa.pearl.pwc.com');
         cy.title().should('eq', 'Log in to Connected Risk Engine');
@@ -47,9 +47,22 @@ describe('Create Campaign', () => {
         cy.get('label').contains('Select All').click();
         cy.get('button').contains('Apply').click();
 
+        //Select date
         cy.get('div').contains('Select date range').click();
-        cy.get('span').contains('Select Month').click();
+
+        cy.get('span').contains('Select month').eq(0).click();
+        cy.get('li').contains('January').click();
+        cy.get('div').contains('Select').eq(0).click();
+        cy.get('li').contains('2018').click();
+
+        cy.get('span').contains('Select month').eq(1).click();
+        cy.get('li').contains('January').click();
+        cy.get('div').contains('Select').eq(1).click();
+        cy.get('li').contains('2018').click();
+
         cy.get('button').contains('Apply').click();
+
+
 
 
     })

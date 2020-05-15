@@ -1,7 +1,7 @@
 const { QA_CONNECTED_RISK_ENGINE_URL } = require('../../../config.js');
 
-describe('Create Campaign', () => {
-    before(function () {
+describe('Compare Campaign Flows', () => {
+    beforeEach(function () {
         cy.visit(QA_CONNECTED_RISK_ENGINE_URL);
         cy.url().should('include', 'qa.pearl.pwc.com');
         cy.title().should('eq', 'Log in to Connected Risk Engine');
@@ -14,7 +14,7 @@ describe('Create Campaign', () => {
         })
     })
 
-    it('Should follow the benchmarking comparison flow', () => {
+    it('Should be able to Compare Campaigns', () => {
 
         cy.url().should('include', '/main/dashboard');
         cy.get('.jss145').should('be.visible');
@@ -30,9 +30,47 @@ describe('Create Campaign', () => {
         // We have to click a neutral area to exit the dropdown menu... probably a bug
         cy.get('#simple-popover').click();
 
-        cy.get('button').contains('Select 2nd campaign').click();
+        //Will need to change next contains to "2nd" once bug is fixed
+        cy.get('button').contains('Select 2st campaign').click();
         cy.get('li').contains('QA Test Data FCF').click();
+
+        // We have to click a neutral area to exit the dropdown menu... probably a bug
+        cy.get('#simple-popover').click();
+
+        //Assert that the correct data is showing once the FE is implemented
         
 
     })
+
+    it('Should be able to compare assessments within a campaign', () => {
+
+        cy.url().should('include', '/main/dashboard');
+        cy.get('.jss145').should('be.visible');
+
+        cy.get('button').contains('Analyse').click();
+        cy.get('li').contains('Comparison').click();
+        cy.get('span').should('contain', 'Comparison');
+
+        cy.get('div').contains('Compare assessments within a campaign').click();
+
+        //Assert that the correct data is showing once the FE is implemented
+
+    })
+
+    it('Should be able to compare assessments from different campaigns', () => {
+
+        cy.url().should('include', '/main/dashboard');
+        cy.get('.jss145').should('be.visible');
+
+        cy.get('button').contains('Analyse').click();
+        cy.get('li').contains('Comparison').click();
+        cy.get('span').should('contain', 'Comparison');
+
+        cy.get('div').contains('Compare assessments from different campaigns').click();
+        
+        //Assert that the correct data is showing once the FE is implemented
+
+    })
+    
+    
 })
