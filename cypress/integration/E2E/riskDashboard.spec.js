@@ -14,6 +14,29 @@ describe('Compare Campaign Flows', () => {
         })
     })
 
+    it.only('Should be accessible through the Campaign Maturity Overview page', () => {
+        cy.url().should('include', '/main/dashboard');
+        cy.get('.jss145').should('be.visible');
+
+        cy.get('[class="sc-gZMcBi sc-iQNlJl idcdkE"]')
+        .contains('QA Test Data IPO v2')
+        .parent().parent()
+        .within(($campaign) => {
+            cy.get('button').contains('View campaign').click();
+        })
+        
+        cy.wait(2000);
+        cy.get('button').contains('Campaign analysis').click();
+        //risk should be capitalised so this will fail once the typo is corrected
+        cy.get('div').contains('View Threat and risk Analysis').click();
+
+        cy.wait(2000);
+        cy.get('[class="sc-ekHBYt infonn"]').should('contain.text', 'QA Test Data IPO v2');
+        cy.get('div').contains('Risk dashboard').click();
+        cy.get('[class="sc-ekHBYt infonn"]').should('contain.text', 'QA Test Data IPO v2');
+
+    })
+
     it('Should be able to compare assessments within a campaign', () => {
 
         cy.url().should('include', '/main/dashboard');

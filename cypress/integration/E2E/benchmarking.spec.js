@@ -14,6 +14,26 @@ describe('Create Campaign', () => {
         })
     })
 
+    it.only('Should be accessible through the Campaign Maturity Overview page', () => {
+        cy.url().should('include', '/main/dashboard');
+        cy.get('.jss145').should('be.visible');
+
+        cy.get('[class="sc-gZMcBi sc-iQNlJl idcdkE"]')
+        .contains('QA Test Data IPO v2')
+        .parent().parent()
+        .within(($campaign) => {
+            cy.get('button').contains('View campaign').click();
+        })
+        
+        cy.wait(2000);
+        cy.get('button').contains('Campaign analysis').click();
+        cy.get('div').contains('View Benchmarking').click();
+
+        cy.wait(2000);
+        cy.get('[class="sc-jGFFOr jbGtrF"]').should('contain.text', 'QA Test Data IPO v2');
+
+    })
+
     it('Should follow the benchmarking comparison flow', () => {
 
         cy.url().should('include', '/main/dashboard');
