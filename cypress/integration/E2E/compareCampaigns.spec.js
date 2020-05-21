@@ -14,7 +14,7 @@ describe('Compare Campaign Flows', () => {
         })
     })
 
-    it.only('Should be accessible through the Campaign Maturity Overview page', () => {
+    it('Should be accessible through the Campaign Maturity Overview page', () => {
         cy.url().should('include', '/main/dashboard');
         cy.get('.jss145').should('be.visible');
 
